@@ -1,0 +1,367 @@
+{
+  "Hiloh": [
+    {
+      "ipa": "/hi.loj/",
+      "definition": "Hello"
+    }
+  ],
+  "Če": [
+    {
+      "ipa": "/t͡ʃe/",
+      "definition": "Because"
+    }
+  ],
+  "Enzo": [
+    {
+      "ipa": "/en.zo/",
+      "definition": "To be",
+      "note": "Enzo is one of the only three irregular verbs in Natalician."
+    }
+  ],
+  "Acařzak": [
+    {
+      "ipa": "/a.d͡ʒaʁ.zak/",
+      "definition": "Confrontation"
+    }
+  ],
+  "Ačanda": [
+    {
+      "ipa": "/a.t͡ʃan.da/",
+      "definition": "Anyday"
+    }
+  ],
+  "A": [
+    {
+      "ipa": "/a/",
+      "definition": "Question Particle",
+      "description": "Marks a declarative sentence as a binary (yes/no) question.",
+      "examples": "A kelšedi Natal? (Do you speak Natalicican?)"
+    }
+  ],
+  "Ački": [
+    {
+      "ipa": "/a/",
+      "definition": "Whichever",
+      "examples": "Ački berrek körkesi anlaso (Whichever car moves first)"
+    }
+  ],
+  "Ačküz": [
+    {
+      "ipa": "/at͡ʃ.kyz/",
+      "definition": "Whoever",
+      "examples": "Serševi ek ačküz dirtis (Whoever did it has to fix it)"
+    }
+  ],
+  "Ačrešir": [
+    {
+      "ipa": "/at͡ʃ.ɾe.ʃiɾ/",
+      "definition": "Anybody, Somebody",
+      "examples": "Ačrešir hašlosui (Anyone can come)"
+    }
+  ],
+  "Ačřeh": [
+    {
+      "ipa": "/at͡ʃ.ʁɛj/",
+      "definition": "Anything",
+      "examples": "Enlesi ačřeh (It can be anything)"
+    }
+  ],
+  "Ada": [
+    {
+      "ipa": "/a.da/",
+      "definition": "No"
+    }
+  ],
+  "Adel": [
+    {
+      "ipa": "/a.dɛl/",
+      "definition": "Honor"
+    }
+  ],
+  "Albom": [
+    {
+      "ipa": "/al.bom/",
+      "definition": "Album"
+    }
+  ],
+  "Anahak": [
+    {
+      "ipa": "/a.na.jak/",
+      "definition": "Loneliness"
+    }
+  ],
+  "Anča": [
+    {
+      "ipa": "/an.t͡ʃa/",
+      "definition": "Unit, Base"
+    }
+  ],
+  "Anla": [
+    {
+      "ipa": "/an.la/",
+      "definition": "First",
+      "examples": "Anla usmon pa sülü ek dałno ensei Neil Armstrong (first man to walk on the moon is Neil Armstrong)"
+    }
+  ],
+  "Anlaso": [
+    {
+      "ipa": "/an.la.so/",
+      "definition": "First",
+      "examples": "Anlaso hasman forzaro (first start the engine)"
+    }
+  ],
+  "Anšocoru": [
+    {
+      "ipa": "/an.ʃo.d͡ʒo.ɾu/",
+      "definition": "Community"
+    }
+  ],
+  "Anšozuk": [
+    {
+      "ipa": "/an.ʃo.zuk/",
+      "definition": "Union"
+    }
+  ],
+  "Anla": [
+    {
+      "ipa": "/an.la/",
+      "definition": "First"
+    }
+  ],
+  "Anšozuk": [
+    {
+      "ipa": "/an.ʃo.zuk/",
+      "definition": "Union"
+    }
+  ],
+  "Artanla": [
+    {
+      "ipa": "/aɾ.tan.la/",
+      "definition": "Assistant, Helper, Helpful, Useful"
+    }
+  ],
+  "Artanzak": [
+    {
+      "ipa": "/aɾ.tan.zak/",
+      "definition": "Assistance, Help"
+    }
+  ],
+  "Arťat": [
+    {
+      "ipa": "/aɾ.θat/",
+      "definition": "Torment"
+    }
+  ],
+  "Arťazak": [
+    {
+      "ipa": "/aɾ.θa.zak/",
+      "definition": "Patience"
+    }
+  ],
+  "Arzik": [
+    {
+      "ipa": "/aɾ.zik/",
+      "definition": "Belief"
+    }
+  ],
+  "Ařkanartat": [
+    {
+      "ipa": "/aʁ.ka.naɾ.tat/",
+      "definition": "Require, Requirement"
+    }
+  ],
+  "Ařkanla": [
+    {
+      "ipa": "/aʁ.kan.la/",
+      "definition": "Beggar"
+    }
+  ],
+  "Ataš": [
+    {
+      "ipa": "/a.taʃ/",
+      "definition": "Dialogue"
+    }
+  ],
+  "Ałšakazzak": [
+    {
+      "ipa": "/aːʃa.ka.zːak/",
+      "definition": "Maintenance"
+    }
+  ],
+  "Äbeleh": [
+    {
+      "ipa": "/æ.bɛ.lɛj/",
+      "definition": "Meager"
+    }
+  ],
+  "Äcänli": [
+    {
+      "ipa": "/æ.d͡ʒæn.li/",
+      "definition": "Guide, Guider"
+    }
+  ],
+  "Ädres": [
+    {
+      "ipa": "/æd.ɾɛs/",
+      "definition": "Address",
+      "examples": "Fas in ädres un (Give me your address)"
+    }
+  ],
+  "Anla": [
+    {
+      "ipa": "/an.la/",
+      "definition": "First"
+    }
+  ],
+  "Äg": [
+    {
+      "ipa": "/æg/",
+      "definition": "With",
+      "examples": "1. A endei äg Könek? (Are you with Könek?)\n2. Äg in ianzak (I have food)",
+      "note": "Äg + pronoun/object + subject makes a possessive sentence. See example 2."
+    }
+  ],
+  "Äg bondavak": [
+    {
+      "ipa": "/an.la/",
+      "definition": "Almost",
+      "alt1": "Bondahso"
+    }
+  ],
+  "Äg cire": [
+    {
+      "ipa": "/æɡ d͡ʒi.ɾe/",
+      "definition": "Surprisingly",
+      "alt1": "Cirehse"
+    }
+  ],
+  "Äg moduršozuk": [
+    {
+      "ipa": "/æɡ mo.duɾ.ʃo.zuk/",
+      "definition": "Approximately"
+    }
+  ],
+  "Äg sunał": [
+    {
+      "ipa": "/æɡ su.naː/",
+      "definition": "Unfortunately",
+      "alt1": "Sunałhso"
+    }
+  ],
+  "Ägcene": [
+    {
+      "ipa": "/æɡ.d͡ʒe.ne/",
+      "definition": "Together"
+    }
+  ],
+  "Ägde": [
+    {
+      "ipa": "/æɡ.de/",
+      "definition": "Without",
+      "examples": "1. Mah ägde cul (Water without food)\n2. Ägde süs berrek (He does not have a car)",
+      "note": "Same as Äg. See example 2."
+    }
+  ],
+  "Äkädemi": [
+    {
+      "ipa": "/æ.kæ.de.mi/",
+      "definition": "Academy"
+    }
+  ],
+  "Äkuäriom": [
+    {
+      "ipa": "/æk.wæɾ.jom/",
+      "definition": "Aquarium"
+    }
+  ],
+  "Anla": [
+    {
+      "ipa": "/an.la/",
+      "definition": "First"
+    }
+  ],
+  "Äl": [
+    {
+      "ipa": "/æl/",
+      "definition": "Exact, Precise, Specific"
+    }
+  ],
+  "Älik": [
+    {
+      "ipa": "/æ.lik/",
+      "definition": "Precision"
+    }
+  ],
+  "Älkołl": [
+    {
+      "ipa": "/æl.koːl/",
+      "definition": "Alcohol"
+    }
+  ],
+  "Älse": [
+    {
+      "ipa": "/æl.se/",
+      "definition": "Exactly, Precisely, Specifically"
+    }
+  ],
+  "Älsen": [
+    {
+      "ipa": "/æl.sɛn/",
+      "definition": "1. Precisionless\n2. Tiresomeness"
+    }
+  ],
+  "Älseneh": [
+    {
+      "ipa": "/æl.sɛ.nɛj/",
+      "definition": "Tired"
+    }
+  ],
+  "Älševi": [
+    {
+      "ipa": "/æl.ʃe.vi/",
+      "definition": "To determine, To precise, To specify"
+    }
+  ],
+  "Älšezik": [
+    {
+      "ipa": "/æl.ʃe.zik/",
+      "definition": "Specification"
+    }
+  ],
+  "Ämäčör": [
+    {
+      "ipa": "/æ.mæ.t͡ʃœɾ/",
+      "definition": "Amateur"
+    }
+  ],
+  "Änder": [
+    {
+      "ipa": "/æn.dɛɾ/",
+      "definition": "Curiosity"
+    }
+  ],
+  "Änet": [
+    {
+      "ipa": "/æ.net/",
+      "definition": "Phase"
+    }
+  ],
+  "Änimähšen": [
+    {
+      "ipa": "/æ.ni.mæj.ʃɛn/",
+      "definition": "Animation"
+    }
+  ],
+  "Änonimus": [
+    {
+      "ipa": "/æ.no.ni.mus/",
+      "definition": "Anonymous"
+    }
+  ],
+  "Ärmizik": [
+    {
+      "ipa": "/æɾ.mi.zik/",
+      "definition": "Harmony"
+    }
+  ]
+}

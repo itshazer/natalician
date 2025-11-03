@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  width: calc(100% - 20px); /* Prevents overflow */
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding doesn’t increase width */
+}
+
+.word-box {
+  margin-top: 20px;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.word-header {
+  /* Simplified header since there is only one element (the transliteration) */
+  display: flex;
+  justify-content: flex-start; /* Align left */
+  align-items: center;
+}
+
+.transliteration {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* REMOVED: .natalicican style block */
+
+.ipa {
+  font-style: italic;
+  color: #555;
+  margin-top: 5px;
+}
+
+.english { /* This class is still used for 'definition' text */
+  font-size: 1.2em;
+  margin-top: 5px;
+}
+
+.description {
+  font-size: 0.9em;
+  color: gray;
+  font-style: italic;
+}
+
+/* --- STYLES for Examples and Notes (kept) --- */
+
+.examples-header {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px dashed #ccc;
+    display: inline-block;
+}
+
+.examples {
+    font-style: italic;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.note-box {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+}
+
+.note-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+.important-note {
+    border: 1px solid #dc3545;
+    background-color: #f8d7da;
+}
+
+.important-note .note-header,
+.important-note .note-text {
+    color: #dc3545; 
+}
