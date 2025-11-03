@@ -2,12 +2,44 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("search");
     const resultDiv = document.getElementById("result");
 
+    // --- NEW: Custom Natalician Alphabet Order and Priority Map ---
+    const NATALICIAN_ALPHABET = "AÄBCČDĎEFGHIJKLŁMNOÖPRŘSŠTŤUÜVZW";
+    const letterPriority = {};
+    for (let i = 0; i < NATALICIAN_ALPHABET.length; i++) {
+        letterPriority[NATALICIAN_ALPHABET[i].toUpperCase()] = i;
+        letterPriority[NATALICIAN_ALPHABET[i].toLowerCase()] = i;
+    }
+
+    // --- NEW: Custom Comparison Function ---
+    function natalicianCompare(wordA, wordB) {
+        const len = Math.min(wordA.length, wordB.length);
+        for (let i = 0; i < len; i++) {
+            const charA = wordA[i];
+            const charB = wordB[i];
+
+            const priorityA = letterPriority[charA] !== undefined ? letterPriority[charA] : Infinity;
+            const priorityB = letterPriority[charB] !== undefined ? letterPriority[charB] : Infinity;
+
+            if (priorityA < priorityB) {
+                return -1; // wordA comes first
+            }
+            if (priorityA > priorityB) {
+                return 1; // wordB comes first
+            }
+            // If priorities are equal, continue to the next letter
+        }
+
+        // If one word is a prefix of the other, the shorter one comes first
+        return wordA.length - wordB.length;
+    }
+
     fetch("words.json")
         .then(response => response.json())
         .then(words => {
             function displayWords(query = "") {
                 resultDiv.innerHTML = "";
-                query = normalizeAll(query.toLowerCase().trim());
+                // Note: Normalizing the query before searching is still fine.
+                query = normalizeAll(query.toLowerCase().trim()); 
 
                 let matches = [];
 
@@ -31,15 +63,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
 
-                // --- NEW CODE: Alphabetical Sorting ---
+                // --- MODIFIED CODE: Custom Alphabetical Sorting ---
                 if (matches.length > 0) {
-                    // Sort the matches array alphabetically based on the word key
-                    matches.sort((a, b) => a.localeCompare(b));
+                    // Sort the matches array using the custom comparison function
+                    matches.sort(natalicianCompare); // CHANGED LINE
                     
                     matches.forEach(match => {
                         const wordData = words[match][0];
                         
-                        // Display logic
+                        // Display logic (remains the same)
                         resultDiv.innerHTML += `
                             <div class="word-box">
                                 <div class="word-header">
