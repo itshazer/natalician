@@ -447,5 +447,17 @@
       "ipa": "/ba.lːuːn/",
       "definition": "Balloon"
     }
+  ],
+  "Bar": [
+    {
+      "ipa": "/baɾ/",
+      "definition": "Bar"
+    }
+  ],
+  "Baral": [
+    {
+      "ipa": "/ba.ɾal/",
+      "definition": "Strong"
+    }
   ]
 }
