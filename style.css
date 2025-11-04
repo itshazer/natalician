@@ -1,66 +1,133 @@
+/* --- SCROLL FIX: PREVENTS PAGE SCROLLING --- */
+
+html, body {
+    height: 100%; /* Take full screen height */
+    margin: 0;
+    overflow: hidden; /* **PREVENTS THE MAIN PAGE FROM SCROLLING** */
+}
+
+/* --- YOUR ORIGINAL STYLES, MODIFIED FOR LAYOUT --- */
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
 }
 
 .container {
-  max-width: 500px;
-  margin: 50px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    /* CHANGE: Replaced fixed margin with flexbox properties */
+    margin: 0 auto; 
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    /* NEW LAYOUT PROPERTIES */
+    height: 100vh; /* Take full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    box-sizing: border-box; /* Include padding in height calculation */
 }
 
+/* --- NEW FEATURE: Sensitive Search Toggle Styles --- */
+
+#sensitive-toggle {
+    margin: 5px 0 10px 0; /* Adjusted margin to fit well between input and results */
+    text-align: left;
+}
+
+#sensitive-toggle label {
+    font-size: 0.9em;
+    font-weight: bold;
+    display: block;
+}
+
+#sensitive-search {
+    width: auto; /* Overrides the input width for the small checkbox */
+    padding: 0;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.sensitive-text {
+    font-size: 0.8em;
+    color: #888;
+    font-style: italic;
+    margin-top: 5px;
+    margin-left: 5px;
+    line-height: 1.2;
+}
+
+
+/* --- THE SCROLLABLE RESULTS AREA --- */
+
+#result {
+    flex-grow: 1; /* **Makes this element take up all available vertical space** */
+    overflow-y: scroll; /* **ENABLES SCROLLING ONLY WITHIN THIS DIV** */
+    margin-top: 10px; /* Space between search box and results */
+    padding: 0 10px; /* Padding for the word boxes inside the scroll area */
+
+    /* HIDE SCROLLBAR (for all major browsers) */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#result::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+/* --- YOUR REMAINING STYLES (Adjusted for new layout) --- */
+
 input {
-  width: calc(100% - 20px); /* Prevents overflow */
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box; /* Ensures padding doesn’t increase width */
+    /* Targetting the search input specificially by its type or ID is safer, but this works */
+    width: 100%; 
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .word-box {
-  margin-top: 20px;
-  text-align: left;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+    margin-top: 0;
+    text-align: left;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.word-box:last-child {
+    border-bottom: none;
 }
 
 .word-header {
-  /* Simplified header since there is only one element (the transliteration) */
-  display: flex;
-  justify-content: flex-start; /* Align left */
-  align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .transliteration {
-  font-size: 1.5em;
-  font-weight: bold;
+    font-size: 1.5em;
+    font-weight: bold;
 }
-
-/* REMOVED: .natalicican style block */
 
 .ipa {
-  font-style: italic;
-  color: #555;
-  margin-top: 5px;
+    font-style: italic;
+    color: #555;
+    margin-top: 5px;
 }
 
-.english { /* This class is still used for 'definition' text */
-  font-size: 1.2em;
-  margin-top: 5px;
+.definition {
+    font-size: 1.2em;
+    margin-top: 5px;
 }
 
 .description {
-  font-size: 0.9em;
-  color: gray;
-  font-style: italic;
+    font-size: 0.9em;
+    color: gray;
+    font-style: italic;
 }
-
-/* --- STYLES for Examples and Notes (kept) --- */
 
 .examples-header {
     font-weight: bold;

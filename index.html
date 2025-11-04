@@ -10,6 +10,17 @@
     <div class="container">
         <h1>Dictionary</h1>
         <input type="text" id="search" placeholder="Search for a word...">
+        
+        <div id="sensitive-toggle">
+            <label for="sensitive-search">
+                <input type="checkbox" id="sensitive-search">
+                Sensitive Search
+            </label>
+            <p id="sensitive-info" class="sensitive-text" style="display: none;">
+                *Search is now sensitive to special characters (e.g., 'š' will not match 's').
+            </p>
+        </div>
+        
         <div id="result"></div>
     </div>
     <script src="app.js"></script>
