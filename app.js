@@ -3,13 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultDiv = document.getElementById("result");
     const sensitiveCheckbox = document.getElementById("sensitive-search");
     const sensitiveInfo = document.getElementById("sensitive-info");
-
-    // --- PAGINATION CONSTANTS & STATE ---
-    const WORDS_PER_PAGE = 50; 
-    let currentPage = 1; 
-    let currentMatches = []; // Store the filtered and sorted list globally for pagination
-    // --- END PAGINATION CONSTANTS & STATE ---
+    const paginationControls = document.getElementById("pagination-controls");
     
+    // --- NEW PAGINATION CONSTANTS ---
+    const WORDS_PER_PAGE = 25;
+    
+    // --- GLOBAL STATE ---
+    let state = {
+        matches: [],        // Stores all filtered and sorted words
+        currentPage: 1,
+        currentQuery: "",
+        isSensitive: false
+    };
+
     // --- IPA Mapping and Constants (Unchanged) ---
     const IPA_MAP = {
         'A': 'a', 'Ä': 'æ', 'B': 'b', 'C': 'd͡ʒ', 'Č': 't͡ʃ', 
@@ -31,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
         'F': 'V' 
     };
 
+    // --- IPA Generation Logic (Unchanged) ---
     function generateIPA(wordInput) {
-        // [IPA Generation Logic is retained and complete]
         let word = wordInput.replace(/[^A-ZÄÖÜČĎŁŘŠŤ]/gi, '').toUpperCase();
         if (!word) return "/--/";
         
@@ -104,36 +110,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const ipaStr = finalIpaList.join('');
         return `/${ipaStr.toLowerCase()}/`;
     }
+    // --- END IPA Generation Logic ---
+
     
-    // --- SORTING LOGIC ---
-    const NATALICIAN_ALPHABET = "AÄBCČDĎEFGHIJKLŁMNOÖPRŘSŠTŤUÜVZW";
-    const letterPriority = {};
-    for (let i = 0; i < NATALICIAN_ALPHABET.length; i++) {
-        letterPriority[NATALICIAN_ALPHABET[i].toUpperCase()] = i;
-        letterPriority[NATALICIAN_ALPHABET[i].toLowerCase()] = i;
-    }
-
-    function natalicianCompare(wordA, wordB) {
-        const len = Math.min(wordA.length, wordB.length);
-        for (let i = 0; i < len; i++) {
-            const charA = wordA[i];
-            const charB = wordB[i];
-
-            const priorityA = letterPriority[charA] !== undefined ? letterPriority[charA] : Infinity;
-            const priorityB = letterPriority[charB] !== undefined ? letterPriority[charB] : Infinity;
-
-            if (priorityA < priorityB) {
-                return -1;
-            }
-            if (priorityA > priorityB) {
-                return 1;
-            }
-        }
-        return wordA.length - wordB.length;
-    }
-    // --- END SORTING LOGIC ---
-
-    // --- NORMALIZATION LOGIC ---
+    // --- NORMALIZATION FUNCTIONS (Unchanged) ---
     function fullNormalize(str) {
         str = str.toLowerCase(); 
         str = str.replace(/[ä]/g, "a");
@@ -162,165 +142,23 @@ document.addEventListener("DOMContentLoaded", function () {
     function getSearchableValue(text, isSensitive) {
         return isSensitive ? text.toLowerCase() : fullNormalize(text);
     }
-    // --- END NORMALIZATION LOGIC ---
+    // --- END NORMALIZATION FUNCTIONS ---
 
-    // --- PAGINATION RENDERING FUNCTION (MODIFIED for NEW HTML structure) ---
-    function renderPaginationControls(totalMatches, totalPages) {
-        // Find existing controls or create a new div for them *before* #result
-        let paginationControlsDiv = document.getElementById("pagination-controls");
-        if (!paginationControlsDiv) {
-            paginationControlsDiv = document.createElement('div');
-            paginationControlsDiv.id = "pagination-controls";
-            // Insert controls *before* the result div inside the container
-            resultDiv.parentNode.insertBefore(paginationControlsDiv, resultDiv);
-            
-            // Apply essential styling for the new controls div
-            paginationControlsDiv.style.marginTop = '10px';
-            paginationControlsDiv.style.marginBottom = '10px';
-            paginationControlsDiv.style.textAlign = 'center';
-        }
-
-        paginationControlsDiv.innerHTML = ""; // Clear existing controls
-
-        if (totalPages <= 1) {
-            // Remove the controls div if not needed
-            if (paginationControlsDiv.parentNode) {
-                paginationControlsDiv.parentNode.removeChild(paginationControlsDiv);
-            }
-            return; 
-        }
-
-        let controlsHTML = "";
-        const isFirst = currentPage === 1;
-        const isLast = currentPage === totalPages;
-
-        // "Go to first"
-        controlsHTML += `<button class="pagination-btn" onclick="goToPage(1)" ${isFirst ? 'disabled' : ''}>Go to first</button>`;
-
-        // "go to previous"
-        controlsHTML += `<button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${isFirst ? 'disabled' : ''}>go to previous</button>`;
-        
-        // Previous dots/page
-        if (currentPage > 3) {
-            controlsHTML += `<span class="dots">...</span>`;
-        }
-        if (currentPage > 1) {
-             // "prevous page number"
-             controlsHTML += `<button class="pagination-btn" onclick="goToPage(${currentPage - 1})">${currentPage - 1}</button>`;
-        }
-        
-        // "current page number" (unclickable)
-        controlsHTML += `<span class="pagination-btn current-page">${currentPage}</span>`;
-
-        // Next dots/page
-        if (currentPage < totalPages) {
-             // "next page"
-             controlsHTML += `<button class="pagination-btn" onclick="goToPage(${currentPage + 1})">${currentPage + 1}</button>`;
-        }
-        if (currentPage < totalPages - 2) {
-            controlsHTML += `<span class="dots">...</span>`;
-        }
-        
-        // "go to next"
-        controlsHTML += `<button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${isLast ? 'disabled' : ''}>go to next</button>`;
-
-        // "go to last"
-        controlsHTML += `<button class="pagination-btn" onclick="goToPage(${totalPages})" ${isLast ? 'disabled' : ''}>go to last</button>`;
-
-        paginationControlsDiv.innerHTML = controlsHTML;
-        
-        // Note: The necessary styling for these buttons (like padding, background, etc.) 
-        // will need to be added to the style.css file if you want them to look polished, 
-        // as they are not currently defined there.
-    }
-
-    // --- Global Page Navigation Function ---
-    window.goToPage = function(page) {
-        const totalPages = Math.ceil(currentMatches.length / WORDS_PER_PAGE);
-
-        if (page >= 1 && page <= totalPages) {
-            currentPage = page;
-            displayCurrentPage(); // Change to use the subset display function
-            
-            // Scroll to the top of the results div (since the whole page is fixed)
-            resultDiv.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }
-    // --- END PAGINATION FUNCTIONS ---
-
-    // --- NEW: Function to display the words for the current page ---
-    function displayCurrentPage() {
-        resultDiv.innerHTML = "";
-        
-        if (currentMatches.length === 0) {
-            resultDiv.innerHTML = "<p>No matching words found.</p>";
-            renderPaginationControls(0, 0);
-            return;
-        }
-
-        const totalMatches = currentMatches.length;
-        const totalPages = Math.ceil(totalMatches / WORDS_PER_PAGE);
-        
-        // Reset to page 1 if current page is now out of bounds
-        if (currentPage > totalPages) {
-            currentPage = 1;
-        }
-
-        const startIndex = (currentPage - 1) * WORDS_PER_PAGE;
-        const endIndex = startIndex + WORDS_PER_PAGE;
-        const wordsToDisplay = currentMatches.slice(startIndex, endIndex);
-        
-        let htmlContent = ""; 
-        
-        wordsToDisplay.forEach(match => {
-            const wordData = words[match][0];
-            const generatedIPA = generateIPA(match);
-            
-            htmlContent += `
-                <div class="word-box">
-                    <div class="word-header">
-                        <h2 class="transliteration">${match}</h2>
-                    </div>
-                    <p class="ipa">${generatedIPA}</p> 
-                    <p class="definition">${wordData.definition}</p>
-                    ${wordData.description ? `<p class="description">${wordData.description}</p>` : ""}
-
-                    ${wordData.examples ? `
-                        <p class="examples-header">Examples:</p>
-                        <p class="examples">${wordData.examples}</p>
-                    ` : ""}
-
-                    ${wordData.note ? `
-                        <div class="note-box important-note">
-                            <p class="note-header">Note:</p>
-                            <p class="note-text">${wordData.note}</p>
-                        </div>
-                    ` : ""}
-                </div>
-            `;
-        });
-        
-        resultDiv.innerHTML = htmlContent;
-        renderPaginationControls(totalMatches, totalPages);
-    }
-    // --- END displayCurrentPage ---
-
-    // --- MODIFIED: Main filtering/sorting function ---
-    function filterAndSortWords(words) {
-        const query = searchInput.value.trim();
-        const isSensitive = sensitiveCheckbox.checked; 
+    
+    // --- CORE LOGIC FUNCTIONS ---
+    
+    // 1. Filters and sorts the entire word list based on search state
+    function filterAndSortWords(query, isSensitive, allWords) {
+        let matches = [];
         const searchableQuery = getSearchableValue(query, isSensitive); 
 
-        let matches = [];
-
-        // 1. Filtering Logic
-        for (const word in words) {
-            const wordData = words[word][0]; 
+        for (const word in allWords) {
+            const wordData = allWords[word][0]; 
 
             const searchableWord = getSearchableValue(word, isSensitive);
             const searchableAlt1 = wordData.alt1 ? getSearchableValue(wordData.alt1, isSensitive) : "";
             const searchableAlt2 = wordData.alt2 ? getSearchableValue(wordData.alt2, isSensitive) : "";
-            const searchableDefinition = getSearchableValue(wordData.definition, isSensitive); 
+            const searchableDefinition = wordData.definition ? getSearchableValue(wordData.definition, isSensitive) : "";
 
             if (
                 searchableQuery === "" ||
@@ -332,37 +170,182 @@ document.addEventListener("DOMContentLoaded", function () {
                 matches.push(word);
             }
         }
-        
-        // 2. Sorting Logic (Using Natalician Compare)
-        matches.sort(natalicianCompare);
-        
-        currentMatches = matches; // Update the global matches list
-        
-        // Always reset to page 1 after filtering/sorting
-        currentPage = 1;
-        
-        displayCurrentPage();
+
+        matches.sort((a, b) => a.localeCompare(b));
+        return matches;
     }
-    // --- END filterAndSortWords ---
 
+    // 2. Renders the words for the current page
+    function displayWords(allWords) {
+        const totalMatches = state.matches.length;
+        
+        const startIndex = (state.currentPage - 1) * WORDS_PER_PAGE;
+        const endIndex = startIndex + WORDS_PER_PAGE;
+        
+        const wordsToDisplay = state.matches.slice(startIndex, endIndex);
 
+        resultDiv.innerHTML = "";
+        
+        if (wordsToDisplay.length > 0) {
+            let htmlContent = "";
+            for (let i = 0; i < wordsToDisplay.length; i++) {
+                const match = wordsToDisplay[i];
+                const wordData = allWords[match][0];
+                
+                const generatedIPA = generateIPA(match);
+                
+                // Display logic
+                htmlContent += `
+                    <div class="word-box">
+                        <div class="word-header">
+                            <h2 class="transliteration">${match}</h2>
+                        </div>
+                        <p class="ipa">${generatedIPA}</p> 
+                        <p class="definition">${wordData.definition}</p>
+                        ${wordData.description ? `<p class="description">${wordData.description}</p>` : ""}
+
+                        ${wordData.examples ? `
+                            <p class="examples-header">Examples:</p>
+                            <p class="examples">${wordData.examples}</p>
+                        ` : ""}
+
+                        ${wordData.note ? `
+                            <div class="note-box important-note">
+                                <p class="note-header">Note:</p>
+                                <p class="note-text">${wordData.note}</p>
+                            </div>
+                        ` : ""}
+                    </div>
+                `;
+            }
+            
+            resultDiv.innerHTML = htmlContent;
+        } else {
+            // Show "No matching words" only when a query is actually entered
+            if (state.currentQuery !== "") {
+                resultDiv.innerHTML = "<p>No matching words found for your current search.</p>";
+            } else {
+                // Should only happen if the dictionary file is actually empty/corrupt
+                resultDiv.innerHTML = "<p>The dictionary is empty or failed to load data.</p>";
+            }
+        }
+        
+        // Scroll results to the top on page change/search
+        resultDiv.scrollTop = 0;
+
+        // 3. Render pagination controls
+        renderPagination(totalMatches, allWords);
+    }
+
+    // 4. Renders the pagination controls (Improved for Last Page access)
+    function renderPagination(totalMatches, allWords) {
+        const totalPages = Math.ceil(totalMatches / WORDS_PER_PAGE);
+        paginationControls.innerHTML = ''; 
+
+        if (totalPages <= 1) {
+            return;
+        }
+        
+        let paginationHtml = '';
+        const currentPage = state.currentPage;
+
+        // Previous button
+        paginationHtml += `<button class="pagination-button" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>`;
+        
+        // --- Page Buttons Logic ---
+        const maxButtons = 5; // Max page numbers to show in the window
+        let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+        let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+        // Adjust start if we're near the end
+        if (endPage - startPage < maxButtons - 1) {
+            startPage = Math.max(1, endPage - maxButtons + 1);
+        }
+
+        // Always show page 1 and ellipsis if not in the window
+        if (startPage > 1) {
+            paginationHtml += `<button class="pagination-button" data-page="1">1</button>`;
+            if (startPage > 2) {
+                paginationHtml += `<span>...</span>`;
+            }
+        }
+
+        // Render the main window buttons
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHtml += `<button class="pagination-button ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        }
+        
+        // Always show last page and ellipsis if not in the window
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHtml += `<span>...</span>`;
+            }
+            paginationHtml += `<button class="pagination-button" data-page="${totalPages}">${totalPages}</button>`;
+        }
+
+        // Next button
+        paginationHtml += `<button class="pagination-button" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
+        
+        paginationControls.innerHTML = paginationHtml;
+
+        // Attach event listeners
+        paginationControls.querySelectorAll('.pagination-button').forEach(button => {
+            if (!button.disabled && button.tagName === 'BUTTON') { // Ensure we only add listeners to buttons
+                button.addEventListener('click', function() {
+                    const newPage = parseInt(this.getAttribute('data-page'));
+                    state.currentPage = newPage;
+                    // Re-display results without re-filtering
+                    displayWords(allWords); 
+                });
+            }
+        });
+    }
+
+    // 5. Handles input/checkbox changes
+    function setupApp(allWords) {
+        // --- FIX: Initial population is run here to ensure state.matches is never empty on load ---
+        state.matches = filterAndSortWords("", false, allWords);
+        state.currentQuery = "";
+        state.isSensitive = false;
+        state.currentPage = 1;
+        displayWords(allWords); // Initial display of words
+
+        function handleSearchChange() {
+            const query = searchInput.value.trim();
+            const isSensitive = sensitiveCheckbox.checked;
+
+            // Check if filtering/sorting is actually needed
+            if (query !== state.currentQuery || isSensitive !== state.isSensitive) {
+                
+                // 1. Update state variables
+                state.currentQuery = query;
+                state.isSensitive = isSensitive;
+                
+                // 2. Perform filtering/sorting and update state.matches
+                state.matches = filterAndSortWords(query, isSensitive, allWords);
+                
+                // 3. Display results starting from page 1
+                state.currentPage = 1;
+            } 
+            
+            // Always display words after a change
+            displayWords(allWords);
+        }
+
+        // --- EVENT LISTENERS ---
+        searchInput.addEventListener("input", handleSearchChange);
+        
+        sensitiveCheckbox.addEventListener("change", function() {
+            sensitiveInfo.style.display = this.checked ? 'block' : 'none';
+            handleSearchChange();
+        });
+    }
+
+    // --- INITIAL FETCH ---
     fetch("words.json")
         .then(response => response.json())
         .then(words => {
-            // --- EVENT LISTENERS ---
-            filterAndSortWords(words); // Initial load
-
-            searchInput.addEventListener("input", () => filterAndSortWords(words));
-            
-            sensitiveCheckbox.addEventListener("change", () => {
-                // The toggle of sensitiveInfo display is handled by the browser based on the `style` attribute in index.html
-                // We just need to trigger the search.
-                filterAndSortWords(words);
-            });
+            setupApp(words);
         })
         .catch(error => console.error("Error loading words:", error));
-    
-    function normalizeAll(str) {
-        return fullNormalize(str);
-    }
 });
