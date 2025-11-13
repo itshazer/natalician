@@ -1,4 +1,192 @@
 {
+  "Tegendidli": [
+    {
+      "definition": "Sterile"
+    }
+  ],
+  "Tegendi": [
+    {
+      "definition": "To be sterile"
+    }
+  ],
+  "Sömbe": [
+    {
+      "definition": "Dirt"
+    }
+  ],
+  "Bunšovu": [
+    {
+      "definition": "To expand/to widen"
+    }
+  ],
+  "Margšovu": [
+    {
+      "definition": "To root"
+    }
+  ],
+  "Marg": [
+    {
+      "definition": "Root"
+    }
+  ],
+  "Lümü": [
+    {
+      "definition": "To dictate"
+    }
+  ],
+  "Kort": [
+    {
+      "definition": "Slow"
+    }
+  ],
+  "Bürrü": [
+    {
+      "definition": "Vow"
+    }
+  ],
+  "Bürü": [
+    {
+      "definition": "To vow"
+    }
+  ],
+  "Leri": [
+    {
+      "definition": "To hurt"
+    }
+  ],
+  "Lerzik": [
+    {
+      "definition": "Pain"
+    }
+  ],
+  "Očušovu": [
+    {
+      "definition": "To run out"
+    }
+  ],
+  "Sanzak": [
+    {
+      "definition": "Attempt"
+    }
+  ],
+  "Ebezik": [
+    {
+      "definition": "Practice"
+    }
+  ],
+  "Ebevi": [
+    {
+      "definition": "To practise"
+    }
+  ],
+  "Kirbivi": [
+    {
+      "definition": "To conceal"
+    }
+  ],
+  "Ceri": [
+    {
+      "definition": "To take over"
+    }
+  ],
+  "Talak": [
+    {
+      "definition": "Inertia"
+    }
+  ],
+  "Karbař": [
+    {
+      "definition": "Severe/Intense"
+    }
+  ],
+  "Mörmevi": [
+    {
+      "definition": "To exhaust"
+    }
+  ],
+  "Denderi": [
+    {
+      "definition": "To restraint"
+    }
+  ],
+  "Zelševi": [
+    {
+      "definition": "To bind"
+    }
+  ],
+    "Kulzuk": [
+    {
+      "definition": "Tension"
+    }
+  ],
+  "Mursuh": [
+    {
+      "definition": "Ground"
+    }
+  ],
+  "Senko": [
+    {
+      "definition": "Signal"
+    }
+  ],
+  "Senkošovu": [
+    {
+      "definition": "To signal"
+    }
+  ],
+  "Čuncuru": [
+    {
+      "definition": "Camouflage"
+    }
+  ],
+  "Ťurku": [
+    {
+      "definition": "To flick"
+    }
+  ],
+  "Merter": [
+    {
+      "definition": "Sharp"
+    }
+  ],
+  "Täferi": [
+    {
+      "definition": "Breath"
+    }
+  ],
+  "Sengen": [
+    {
+      "definition": "Quiet"
+    }
+  ],
+  "Emer": [
+    {
+      "definition": "Faint"
+    }
+  ],
+  "Rutin": [
+    {
+      "definition": "Routine"
+    }
+  ],
+  "Šamať": [
+    {
+      "ipa": "/n.t/",
+      "definition": "Rust"
+    }
+  ],
+  "Närd": [
+    {
+      "ipa": "/n.t/",
+      "definition": "Dust"
+    }
+  ],
+  "Keči": [
+    {
+      "ipa": "/ke.t͡ʃi/",
+      "definition": "To promise"
+    }
+  ],
   "Hiloh": [
     {
       "ipa": "/hi.loj/",
@@ -3855,7 +4043,7 @@
       "definition": "Marine"
     }
   ],
-  "Kort": [
+  "Kołrt": [
     {
       "ipa": "/i.o.r.t/",
       "definition": "Court"
@@ -5030,7 +5218,7 @@
       "definition": "Betrayal"
     }
   ],
-  "Fetsele": [
+  "Zel": [
     {
       "ipa": "/ɛ.e.t.s.e.l.e/",
       "definition": "Bind"
@@ -9231,10 +9419,14 @@
       "definition": "To live (biologically)"
     }
   ],
-  "Veni [in]": [
+  "Veniri": [
     {
-      "ipa": "/θ.e.n.i. .[.i.n.]/",
       "definition": "To feel [like]"
+    }
+  ],
+  "Veni": [
+    {
+      "definition": "To feel"
     }
   ],
   "Nuru": [
