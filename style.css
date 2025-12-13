@@ -30,6 +30,34 @@ body {
     box-sizing: border-box; /* Include padding in height calculation */
 }
 
+/* *** NEW FEATURE: Learning Page Link/Button Styles *** */
+
+#learning-link {
+    /* Ensures the anchor tag takes full width for a block button */
+    display: block; 
+    text-decoration: none; /* Remove underline from the link */
+    margin-bottom: 15px; /* Space below the button */
+}
+
+.action-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745; /* Green color for action/start */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-sizing: border-box; /* Include padding/border in button width */
+}
+
+.action-button:hover {
+    background-color: #1e7e34;
+}
+
+
 /* --- NEW FEATURE: Sensitive Search Toggle Styles --- */
 
 #sensitive-toggle {

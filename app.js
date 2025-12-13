@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (VOICELESS_CONSONANTS.includes(char1) && VOICED_CONSONANTS.includes(char2)) {
                 if (ASSIMILATION_PAIRS[char1]) {
-                     chars[i] = ASSIMILATION_PAIRS[char1];
+                    chars[i] = ASSIMILATION_PAIRS[char1];
                 }
             }
         }
@@ -93,15 +93,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             
             if (IPA_MAP[char]) {
-                 const ipaVal = IPA_MAP[char];
-                 if (char === 'Ł') {
+                const ipaVal = IPA_MAP[char];
+                if (char === 'Ł') {
                     if (finalIpaList.length > 0 && VOWELS.includes(prevChar)) {
                         finalIpaList[finalIpaList.length - 1] += ipaVal;
                     }
-                 } else {
+                } else {
                     finalIpaList.push(ipaVal);
-                 }
-                 i++;
+                }
+                i++;
             } else {
                 i++;
             }
@@ -158,8 +158,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const searchableWord = getSearchableValue(word, isSensitive);
             const searchableAlt1 = wordData.alt1 ? getSearchableValue(wordData.alt1, isSensitive) : "";
             const searchableAlt2 = wordData.alt2 ? getSearchableValue(wordData.alt2, isSensitive) : "";
-            const searchableDefinition = wordData.definition ? getSearchableValue(wordData.definition, isSensitive) : "";
+            
+            // --- NEW LOGIC: Only calculate searchableDefinition if search is NOT sensitive ---
+            const searchableDefinition = (!isSensitive && wordData.definition) 
+                ? getSearchableValue(wordData.definition, isSensitive) 
+                : "";
+            // ----------------------------------------------------------------------------------
 
+            // --- CONDITION MODIFICATION ---
+            // The English definition is only checked if searchableDefinition is not an empty string, 
+            // which it now is when isSensitive is true.
             if (
                 searchableQuery === "" ||
                 searchableWord.includes(searchableQuery) ||
@@ -169,6 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
                 matches.push(word);
             }
+            // ------------------------------
         }
 
         matches.sort((a, b) => a.localeCompare(b));
